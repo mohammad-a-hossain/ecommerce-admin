@@ -3,7 +3,9 @@ import React from 'react'
 
  const Layout = () => {
   return (
-    <div>index</div>
+    <div>
+    <p className='text-red'> layour</p> 
+    </div>
   )
 }
 export default Layout
