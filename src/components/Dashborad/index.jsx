@@ -1,7 +1,6 @@
 import React from 'react'
 
-import { Box, Button,IconButton, useTheme,Typography} from '@mui/material';
-import { Header } from '../Header';
+import { Box,IconButton, useTheme,Typography} from '@mui/material';
 import { tokens } from './../../theme';
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import EmailIcon from "@mui/icons-material/Email";

@@ -131,7 +131,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
                 admin name
               </Typography>
               <Typography variant="h6" color={colors.greenAccent[500]}>
-                VP Fancy Admin
+               the super admin
               </Typography>
             </Box>
           </Box>

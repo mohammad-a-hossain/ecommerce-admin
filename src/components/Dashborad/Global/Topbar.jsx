@@ -1,5 +1,8 @@
-import React from 'react'
+import React,{useState} from 'react'
 import {Box,IconButton, useTheme} from '@mui/material'
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { useContext } from 'react';
 import { ColorModeContext, tokens } from '../../../theme'; 
 import InputBase from '@mui/material/InputBase'
@@ -19,6 +22,18 @@ export const Topbar = () => {
     const colorMode =useContext(ColorModeContext)
 
 
+
+    const [anchorEl, setAnchorEl] = useState(null);
+    const open = Boolean(anchorEl);
+    const handleClick = (event) => {
+      setAnchorEl(event.currentTarget);
+    };
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    
+
   return (
     <Box display= 'flex' justifyContent='space-between' p={2}>
     <Box display='flex' backgroundColor={colors.primary[400]} borderRadius='3px'>
@@ -36,12 +51,33 @@ export const Topbar = () => {
     <IconButton>
     <NotificationImportantOutlinedIcon/>
     </IconButton>
-    <IconButton>
-    <Person2OutlinedIcon/>
-    </IconButton>
+
+    <div>
+    <Button
+      id="basic-button"
+      aria-controls={open ? 'basic-menu' : undefined}
+      aria-haspopup="true"
+      aria-expanded={open ? 'true' : undefined}
+      onClick={handleClick}
+    >
     <IconButton>
     <SettingsOutlinedIcon/>
     </IconButton>
+    </Button>
+    <Menu
+      id="basic-menu"
+      anchorEl={anchorEl}
+      open={open}
+      onClose={handleClose}
+      MenuListProps={{
+        'aria-labelledby': 'basic-button',
+      }}
+    >
+    
+      <MenuItem onClick={()=>alert('logout')}>Logout</MenuItem>
+    </Menu>
+  </div>
+  
     </Box>
     
     </Box>
