@@ -1,23 +1,28 @@
 
 
-import { ColorModeContext, useMode } from "./theme";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-//import { ProSidebarProvider } from 'react-pro-sidebar';
-//import { useState } from 'react';
+import { useState } from 'react';
 import { 
   Routes,
   Route
 } from "react-router-dom";
-//import  Sideber  from './components/Dashborad/Global/Sideber';
-import  {Navbar } from './component/Navbar';
-import  {Dashboard } from "./component/Dashboard";
-// import{ Team }from './components/Dashborad/Team'
 
-// import Contacts from "./components/Dashborad/Contacts";
+
+import { ColorModeContext, useMode } from "./theme";
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { ProSidebarProvider } from 'react-pro-sidebar';
+
+import Sideber from "./components/Dashborad/Global/Sideber";
+
+
+
+import  {Topbar } from './components/Dashborad/Global/Topbar';
+import  {Dashboard } from "./components/Dashborad";
+
+ import Contacts from "./components/Dashborad/Contacts";
 
 // import Invoices from './components/Dashborad/Invoice';
 
-// import Form from './components/Dashborad/Form'
+ import Form from './components/Dashborad/Form'
 // import Calendar from "./components/Dashborad/Calendar";
 // import  Faq  from "./components/Dashborad/Faq";
 
@@ -27,30 +32,53 @@ import  {Dashboard } from "./component/Dashboard";
 // import Line from './components/Dashborad/Line'
  
 // import Geography  from "./components/Dashborad/Geography"
- 
+ import { AddCategory } from './components/Dashborad/AddCategory';
+ import { AddSubCategory  } from './components/Dashborad/SubCategory'
+ import { AddProduct } from './components/Dashborad/AddProduct';
+import Login from "./components/Login";
+
+
 
 
 
 const App =() => {
 const [ theme, colorMode] = useMode()
-//const [isSidebar, setIsSidebar] =useState(true)
+const [isSidebar, setIsSidebar] =useState(true)
+
   return (
     <ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
     <CssBaseline/>
       <div className="app">
-  {/*  <ProSidebarProvider> 
+   <ProSidebarProvider> 
     <Sideber isSidebar={isSidebar} />
-   </ProSidebarProvider> */}
+   </ProSidebarProvider>
     
+
       <main className='content'>
-      <Navbar/>
-      <Routes>
-    <Route path='/' element={<Dashboard/>}/>
+      <Topbar/>
+       <Routes>
+       <Route exact path='/login' element={<Login/>}/>
+      <Route path='/' element={<Dashboard/>}/>
+      <Route path='/addcategory' element={<AddCategory/>}/> 
     
+      <Route path='/contacts' element={<Contacts/>}/> 
+      
+      <Route path='/subcategory' element={<AddSubCategory/>}/> 
+      <Route path='/addproduct' element={<AddProduct/>}/> 
   
-  
-    </Routes> 
+      <Route path='/form'element={<Form/>}/> 
+      <Route path='/calender' element={'#$'}/> 
+      <Route path='/faq' element={'#$'}/>  
+        <Route path='/bar' element={'#$'}/>
+        
+      <Route path='/pie' element={'#$'}/>
+   
+      <Route path='/line' element={'#$'}/>
+      
+      <Route path='/geography' element={'#$'}/>
+    
+      </Routes> 
       </main>
     </div>   
      </ThemeProvider>
@@ -59,67 +87,3 @@ const [ theme, colorMode] = useMode()
 }
 
 export default App
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//import './App.css'
-/* import { CssBaseline, ThemeProvider } from "@mui/material";
-
-import Layout from "./scenes/layout";
-import { Dashboard } from "./scenes/layout/dashboard";
-import {  Route ,Routes } from "react-router-dom";
-import { ColorModeContext,useMode } from './theme';
-import { Navbar } from './component/Navbar';
-
-
-function App() {
-  const [ theme, colorMode] = useMode()
- //const theme = useMemo(() => createTheme(themeSettings(mode)), [mode])
-
-
-  return (
-    <ColorModeContext.Provider value={colorMode}>
-    
-        <ThemeProvider theme={theme}>
-        <CssBaseline/>
-        <Routes>
-        <Route path="/" element={<Layout/>}/>
-        <Route path="/dashboard" element={<Dashboard/> }/>
-
-        </Routes>
-    </ThemeProvider>
-  
-    </ColorModeContext.Provider>
-
-  )
-}
-
-export default App
- */

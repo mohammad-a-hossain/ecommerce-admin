@@ -1,6 +1,5 @@
 import { createContext,useState,useMemo } from "react";
-//import { createTheme } from "@mui/material/styles";
-import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 // color digit token
 
 export const tokens=(mode)=> ({
