@@ -58,8 +58,8 @@ const [isSidebar, setIsSidebar] =useState(true)
       <main className='content'>
       <Topbar/>
        <Routes>
-       <Route exact path='/login' element={<Login/>}/>
-      <Route path='/' element={<Dashboard/>}/>
+       <Route exact path='/' element={<Login/>}/>
+      <Route path='/dashboard' element={<Dashboard/>}/>
       <Route path='/addcategory' element={<AddCategory/>}/> 
     
       <Route path='/contacts' element={<Contacts/>}/> 
