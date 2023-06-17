@@ -35,7 +35,9 @@ import  {Dashboard } from "./components/Dashborad";
  import { AddCategory } from './components/Dashborad/AddCategory';
  import { AddSubCategory  } from './components/Dashborad/SubCategory'
  import { AddProduct } from './components/Dashborad/AddProduct';
-import Login from "./components/Login";
+import Login from "./Login";
+import  Register  from './register';
+import  Profile  from './components/Users/Profile';
 
 
 
@@ -58,15 +60,20 @@ const [isSidebar, setIsSidebar] =useState(true)
       <main className='content'>
       <Topbar/>
        <Routes>
-       <Route exact path='/' element={<Login/>}/>
+       <Route exact path='/' element={<Register/>}/>
       <Route path='/dashboard' element={<Dashboard/>}/>
-      <Route path='/addcategory' element={<AddCategory/>}/> 
+      <Route path='/dashboard/addcategory' element={<AddCategory/>}/> 
     
       <Route path='/contacts' element={<Contacts/>}/> 
       
       <Route path='/subcategory' element={<AddSubCategory/>}/> 
       <Route path='/addproduct' element={<AddProduct/>}/> 
   
+
+      <Route path='/login' element={<Login/>} /> 
+      <Route path='/profile' element={<Profile/>}/> 
+
+
       <Route path='/form'element={<Form/>}/> 
       <Route path='/calender' element={'#$'}/> 
       <Route path='/faq' element={'#$'}/>  
