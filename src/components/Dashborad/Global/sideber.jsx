@@ -19,18 +19,24 @@ import { useTheme, Box, Typography, IconButton } from '@mui/material';
 import { tokens } from '../../../theme';
 import { useState } from 'react';
 import user from '../../../assets/user.png'
-
+//import {useSelector } from "react-redux";
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 
+ 
 
 
 
 
 
  const Item = ( {title, to, icon, selected, setSelected }) => {
+
+  
+
+  //  console.log('sid',adminInfo)
+
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
@@ -57,13 +63,9 @@ import FormControlLabel from '@mui/material/FormControlLabel';
   const colors= tokens(theme.palette.mode)
   const [isCollapsed,setIsCollapsed] = useState(false)
   const [ selected, setSelected] = useState()
-
-
-
-
-
-  
-
+  //const { adminInfo} = useSelector((state) => state.auth)
+ 
+ console.log('this is sidebar')
 
   return (
     <Box sx={{
@@ -121,6 +123,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
                 style={{ cursor: "pointer", borderRadius: "50%" }}
               />
             </Box>
+          
             <Box textAlign="center">
               <Typography
                 variant="h4"
@@ -128,7 +131,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
               
                 sx={{ m: "10px 0 0 0" }}
               >
-                admin name
+               firstname 
+          
               </Typography>
               <Typography variant="h6" color={colors.greenAccent[500]}>
                the super admin
@@ -137,6 +141,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
           </Box>
           )
         }
+
+    
         <Box paddingLeft={isCollapsed ? undefined : "10%"}>
         <Item
           title="Dashboard"

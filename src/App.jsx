@@ -39,6 +39,11 @@ import Login from "./Login";
 import  Register  from './register';
 import  Profile  from './components/Users/Profile';
 
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import { Provider } from 'react-redux'
+import store from '../store.js'
 
 
 
@@ -48,6 +53,7 @@ const [ theme, colorMode] = useMode()
 const [isSidebar, setIsSidebar] =useState(true)
 
   return (
+    <Provider store={store}>
     <ColorModeContext.Provider value={colorMode}>
     <ThemeProvider theme={theme}>
     <CssBaseline/>
@@ -56,9 +62,12 @@ const [isSidebar, setIsSidebar] =useState(true)
     <Sideber isSidebar={isSidebar} />
    </ProSidebarProvider>
     
-
+   
       <main className='content'>
+   
       <Topbar/>
+      <ToastContainer/>     
+      
        <Routes>
        <Route exact path='/' element={<Register/>}/>
       <Route path='/dashboard' element={<Dashboard/>}/>
@@ -86,10 +95,13 @@ const [isSidebar, setIsSidebar] =useState(true)
       <Route path='/geography' element={'#$'}/>
     
       </Routes> 
-      </main>
+
+      </main>  
+     
     </div>   
      </ThemeProvider>
   </ColorModeContext.Provider>
+  </Provider>
   )
 }
 

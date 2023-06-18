@@ -12,8 +12,11 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import {  useNavigate } from 'react-router-dom'
+import { useLogoutMutation } from '../../../redux/adminApiSlice';
+import { logout } from '../../../redux/authSlice';
+import{ toast }from 'react-toastify'
 
 
 export const Topbar = () => {
@@ -21,18 +24,40 @@ export const Topbar = () => {
     const colors= tokens(theme.palette.mode)
     const colorMode =useContext(ColorModeContext)
 
-
+  //  const { adminInfo } = useSelector((state) => state.adminInfo)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
+
+
+    const dispatch= useDispatch()
+    const navigate=  useNavigate()
+
+    const [logoutApiCall] = useLogoutMutation();
+
+
     const handleClose = () => {
       setAnchorEl(null);
     };
 
     
+    const adminLogout =async()=>{
+       try{
+        await logoutApiCall().unwrap()
+        dispatch(logout())
+        toast.success('admin sign out success')
+        navigate('/')
+       }catch(err){
+        console.log(err)
+       }
+
+    }
+    
+
+
 
   return (
     <Box display= 'flex' justifyContent='space-between' p={2}>
@@ -73,8 +98,9 @@ export const Topbar = () => {
         'aria-labelledby': 'basic-button',
       }}
     >
-    
-      <MenuItem onClick={()=>alert('logout')}>Logout</MenuItem>
+     <MenuItem >Profile</MenuItem>
+     
+      <MenuItem onClick={adminLogout}>Logout</MenuItem>
     </Menu>
   </div>
   

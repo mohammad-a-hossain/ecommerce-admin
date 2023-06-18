@@ -11,6 +11,12 @@ export const adminApiSlice = apiSlice.injectEndpoints({
                 body:data,
             }),
         }),
+        logout: builder.mutation({
+            query: () => ({
+              url: `${ADMIN_URL}/logout`,
+              method: 'POST',
+            }),
+          }),
         registration: builder.mutation({
             query: (data) => ({
               url: `${ADMIN_URL}/register`,
@@ -22,4 +28,5 @@ export const adminApiSlice = apiSlice.injectEndpoints({
 })
 
 export const { useLoginMutation, 
-              useRegistrationMutation } = adminApiSlice;
+              useRegistrationMutation,
+            useLogoutMutation } = adminApiSlice;

@@ -12,7 +12,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { useLoginMutation} from './redux/adminApiSlice'
 
 import { setCredentials } from "./redux/authSlice";
-
+import{ toast }from 'react-toastify'
 
 
 
@@ -34,6 +34,7 @@ export default function Login() {
 
   useEffect(()=>{
     if(adminInfo){
+      toast.success('login success')
       navigate('/dashboard')
     }
   },[navigate, adminInfo])
@@ -63,8 +64,8 @@ export default function Login() {
       dispatch(setCredentials({...res}))
       navigate('/')
 
-    }catch(err){
-      console.log(err.data.message || err.message)
+    }catch(error){
+      toast.success(error.data.message || error.message)
     }
     // adminsignin(data).then(response => {
     //         console.log('SIGNIN SUCCESS', response);

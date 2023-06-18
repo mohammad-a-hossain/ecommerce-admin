@@ -8,6 +8,7 @@ import {useDispatch,useSelector } from 'react-redux';
 //import useMediaQuery from "@mui/material/useMediaQuery";
 import {useRegistrationMutation } from './redux/adminApiSlice'
 import { setCredentials } from "./redux/authSlice";
+import{ toast }from 'react-toastify'
 
 
  const Register = () => {
@@ -26,16 +27,17 @@ import { setCredentials } from "./redux/authSlice";
     
     try{
      const res =  await registration(values).unwrap()
-        // dispatch(setCredentials({...res}))
+         dispatch(setCredentials({...res}))
 
          if(res){
+          toast.success('admin register success')
             navigate('/login')
          }
       
     
 
     }catch(err){
-      console.log(err.data.message || err.message)
+      toast.error(err.data.message || err.message)
     }
 
   
@@ -146,7 +148,7 @@ import { setCredentials } from "./redux/authSlice";
       </form>
     )}
   </Formik>
-  <p><Link to='/'>signin</Link></p>
+  <p><Link to='/login'>signin</Link></p>
     </Box>
   )
 
