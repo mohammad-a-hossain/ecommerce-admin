@@ -19,7 +19,7 @@ import { useTheme, Box, Typography, IconButton } from '@mui/material';
 import { tokens } from '../../../theme';
 import { useState } from 'react';
 import user from '../../../assets/user.png'
-//import {useSelector } from "react-redux";
+import {useSelector } from "react-redux";
 import Switch from '@mui/material/Switch';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -63,9 +63,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
   const colors= tokens(theme.palette.mode)
   const [isCollapsed,setIsCollapsed] = useState(false)
   const [ selected, setSelected] = useState()
-  //const { adminInfo} = useSelector((state) => state.auth)
+
+  const authUser  = useSelector((state) => state.auth)
  
- console.log('this is sidebar')
+ console.log('this is sidebar',authUser)
 
   return (
     <Box sx={{
@@ -131,7 +132,10 @@ import FormControlLabel from '@mui/material/FormControlLabel';
               
                 sx={{ m: "10px 0 0 0" }}
               >
-               firstname 
+               
+              
+               {authUser.user !== null ? (authUser.user.firstname):( <p>adminName</p>) }
+             
           
               </Typography>
               <Typography variant="h6" color={colors.greenAccent[500]}>

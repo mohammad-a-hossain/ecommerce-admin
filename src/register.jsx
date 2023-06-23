@@ -6,9 +6,10 @@ import { Header } from './components/Header/index';
 import { Link ,useNavigate} from 'react-router-dom';
 import {useDispatch,useSelector } from 'react-redux';
 //import useMediaQuery from "@mui/material/useMediaQuery";
-import {useRegistrationMutation } from './redux/adminApiSlice'
-import { setCredentials } from "./redux/authSlice";
-import{ toast }from 'react-toastify'
+//import {useRegistrationMutation } from './redux/adminApiSlice'
+//import { setCredentials } from "./redux/authSlice";
+//import{ toast }from 'react-toastify'
+import {registerUser} from './features/users/userSlice'
 
 
  const Register = () => {
@@ -18,27 +19,31 @@ import{ toast }from 'react-toastify'
   const navigate= useNavigate()
   const dispatch = useDispatch()
 
-  const [registration,{isLoading} ] =useRegistrationMutation()
+  //const [registration,{isLoading} ] =useRegistrationMutation()
 
  
  
 
-  const handleFormSubmit= async (values)=>{
+  const handleFormSubmit=(values)=>{
     
-    try{
-     const res =  await registration(values).unwrap()
-         dispatch(setCredentials({...res}))
+    dispatch(registerUser(values))
+    navigate('/login')
+    
+    
+    // try{
+    //  const res =  await registration(values).unwrap()
+    //      dispatch(setCredentials({...res}))
 
-         if(res){
-          toast.success('admin register success')
-            navigate('/login')
-         }
+    //      if(res){
+    //       toast.success('admin register success')
+    //         navigate('/login')
+    //      }
       
     
 
-    }catch(err){
-      toast.error(err.data.message || err.message)
-    }
+    // }catch(err){
+    //   toast.error(err.data.message || err.message)
+    // }
 
   
 
@@ -148,7 +153,7 @@ import{ toast }from 'react-toastify'
       </form>
     )}
   </Formik>
-  <p><Link to='/login'>signin</Link></p>
+ <Link to='/login'>login </Link>
     </Box>
   )
 

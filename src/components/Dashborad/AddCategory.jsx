@@ -9,7 +9,8 @@ import DialogContent from '@mui/material/DialogContent';
 //import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useForm} from 'react-hook-form'
-
+import  {useDispatch,useSelector } from 'react-redux'
+import { createCategory } from '../../features/category/catSlice';
 
 
 
@@ -33,6 +34,12 @@ const FormDialog=()=> {
   const colors = tokens(theme.palette.mode)
   const [open, setOpen] = React.useState(false);
 
+ // const newCategory = useSelector((state) => state.Category);
+ // console.log(newCategory)
+
+  const disaptach= useDispatch()
+  //const navigate= useNavigate()
+
   const form = useForm({
         category:''
   })
@@ -43,6 +50,7 @@ const FormDialog=()=> {
 
   const onSubmit = (data) =>{
     console.log(data)
+    disaptach(createCategory(data))
   }
   
   const handleClickOpen = () => {
@@ -74,7 +82,8 @@ const FormDialog=()=> {
            error={!!errors.category} 
            helperText={errors.category?.message} />
           
-        <Button type='submin' variant='contained'  > Add </Button>
+       
+           <Button type='submin' variant='contained'  > Add </Button>
           
           </Stack>
           </form>
@@ -107,24 +116,14 @@ export const AddCategory = () => {
      headerName:'Full Name',
     flex:1,
     cellClassName:'name-column--cell'},
-    {
-      field:'age',
-      headerName:'Age',
-      type:'number',
-      headerAlign:'left',
-      align:'left'
-    },
+   
     {
       field:'phone',
       headerAlign:'Phone Number',
       flex:1
 
     },
-    {
-      field:'email',
-      headerName:'Email',
-      flex:1
-    },
+    
     {
       field:'accessLevel',
       headerName:'Access level',

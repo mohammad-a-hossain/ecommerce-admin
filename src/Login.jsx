@@ -9,35 +9,35 @@ import  {tokens}  from './theme';
 import { useNavigate ,Link} from "react-router-dom";
 import { useDispatch,useSelector } from "react-redux";
 //import { adminsignin, authenticate  } from "./components/functions/admin";
-import { useLoginMutation} from './redux/adminApiSlice'
+//import { useLoginMutation} from './redux/adminApiSlice'
 
-import { setCredentials } from "./redux/authSlice";
-import{ toast }from 'react-toastify'
+//import { setCredentials } from "./redux/authSlice";
+//import{ toast }from 'react-toastify'
+import { loginAdmin } from "./features/users/userSlice";
 
 
 
 export default function Login() {
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
+
 
   const theme = useTheme()
   const colors = tokens(theme.palette.mode)
 
-  const { adminInfo } = useSelector((state) => state.auth)
-
+   const authUser  = useSelector((state) => state.auth)
+ // console.log(authUser)
 
   const navigate= useNavigate()
   const dispatch = useDispatch()
 
-  const [login,{isLoading} ] =  useLoginMutation()
+ // const [login,{isLoading} ] =  useLoginMutation()
 
 
-  useEffect(()=>{
-    if(adminInfo){
-      toast.success('login success')
-      navigate('/dashboard')
-    }
-  },[navigate, adminInfo])
+  // useEffect(()=>{
+  //   if(adminInfo){
+  //     toast.success('login success')
+  //     navigate('/dashboard')
+  //   }
+  // },[navigate, adminInfo])
 
 
 
@@ -53,20 +53,30 @@ export default function Login() {
 
 
 
-
-
-
-  const onSubmit = async (body,e) =>{
- 
-        e.preventDefault();
-    try{
-      const res = await login(body).unwrap()
-      dispatch(setCredentials({...res}))
-      navigate('/')
-
-    }catch(error){
-      toast.success(error.data.message || error.message)
+const onSubmit = (data)=>{
+  dispatch(loginAdmin(data)) 
+  setTimeout(()=>{//typeof(authUser.isSuccess)
+    if(authUser.isSuccess){
+        navigate('/dashboard')
     }
+
+  },300)
+
+
+}
+
+
+  // const onSubmit = async (body,e) =>{
+ 
+  //       e.preventDefault();
+  //   try{
+  //     const res = await login(body).unwrap()
+  //     dispatch(setCredentials({...res}))
+  //     navigate('/')
+
+  //   }catch(error){
+  //     toast.success(error.data.message || error.message)
+  //   }
     // adminsignin(data).then(response => {
     //         console.log('SIGNIN SUCCESS', response);
     //         // save the response (user, token) localstorage/cookie
@@ -82,14 +92,14 @@ export default function Login() {
     //        // toast.error(error.response.data.error);
     //     });
 
-  }
+  //}
 
 
  
   return (
     <div>
     
-    <p><Link to='/register'>signup</Link></p>
+    
     <h1>login form</h1> 
     <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <Stack spacing={2 } width={400} color={colors.grey[100]}>

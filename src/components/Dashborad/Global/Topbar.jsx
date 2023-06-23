@@ -14,9 +14,10 @@ import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import { useSelector, useDispatch } from 'react-redux';
 import {  useNavigate } from 'react-router-dom'
-import { useLogoutMutation } from '../../../redux/adminApiSlice';
-import { logout } from '../../../redux/authSlice';
+//import { useLogoutMutation } from '../../../redux/adminApiSlice';
+//import { logout } from '../../../redux/authSlice';
 import{ toast }from 'react-toastify'
+import { logoutAdmin } from './../../../features/users/userSlice';
 
 
 export const Topbar = () => {
@@ -24,7 +25,7 @@ export const Topbar = () => {
     const colors= tokens(theme.palette.mode)
     const colorMode =useContext(ColorModeContext)
 
-  //  const { adminInfo } = useSelector((state) => state.adminInfo)
+  //  const { admininfo } = useSelector((state) => state.adminInfo)
 
     const [anchorEl, setAnchorEl] = useState(null);
     const open = Boolean(anchorEl);
@@ -33,26 +34,29 @@ export const Topbar = () => {
     };
 
 
-    const dispatch= useDispatch()
-    const navigate=  useNavigate()
+     const dispatch= useDispatch()
+     const navigate=  useNavigate()
 
-    const [logoutApiCall] = useLogoutMutation();
+   // const [logoutApiCall] = useLogoutMutation();
 
 
     const handleClose = () => {
-      setAnchorEl(null);
+       setAnchorEl(null);
     };
 
     
-    const adminLogout =async()=>{
-       try{
-        await logoutApiCall().unwrap()
-        dispatch(logout())
-        toast.success('admin sign out success')
-        navigate('/')
-       }catch(err){
-        console.log(err)
-       }
+    const adminLogout =async()=>{ 
+      console.log('logout')
+      dispatch(logoutAdmin())
+      navigate('/')
+      //  try{
+      //   await logoutApiCall().unwrap()
+      //   dispatch(logout())
+      //   toast.success('admin sign out success')
+      //   navigate('/')
+      //  }catch(err){
+      //   console.log(err)
+      //  }
 
     }
     
